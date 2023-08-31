@@ -18,17 +18,22 @@ func Repl(cfg *config) {
 			log.Fatal(err)
 		}
 
-		word := sc.Text()
-		if len(word) == 0 {
+		words := sc.Text()
+		if len(words) == 0 {
 			continue
 		}
 
-		word = strings.ToLower(word)
-		word = strings.Fields(word)[0]
+		wordLow := strings.ToLower(words)
+		wordsF := strings.Fields(wordLow)
 
-		command, ok := Commands()[word]
+		args := []string{}
+		if len(words) > 1 {
+			args = wordsF[1:]
+		}
+
+		command, ok := Commands()[wordsF[0]]
 		if ok {
-			err := command.callback(cfg)
+			err := command.callback(cfg, args...)
 			if err != nil {
 				fmt.Println(err)
 			}

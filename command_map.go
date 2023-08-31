@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func mapN(cfg *config) error {
+func mapN(cfg *config, args ...string) error {
 	locResp, err := cfg.pokeapiClient.ListLocations(cfg.nextLocURL)
 	if err != nil {
 		return err
@@ -18,7 +18,7 @@ func mapN(cfg *config) error {
 	return nil
 }
 
-func mapB(cfg *config) error {
+func mapB(cfg *config, args ...string) error {
 	if cfg.prevLocURL == nil {
 		return errors.New("You are on the First page (use the 'map' command)")
 	}

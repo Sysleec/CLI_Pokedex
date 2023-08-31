@@ -5,7 +5,7 @@ import "github.com/Sysleec/CLI_Pokedex/internal/pokeapi"
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(*config, ...string) error
 }
 
 type config struct {
@@ -35,6 +35,11 @@ func Commands() map[string]cliCommand {
 			name:        "mapb",
 			description: "Get the previous page of locations",
 			callback:    mapB,
+		},
+		"explore": {
+			name:        "explore <location_name>",
+			description: "Explore a location",
+			callback:    Explore,
 		},
 	}
 }
