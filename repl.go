@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func Repl() {
+func Repl(cfg *config) {
 	sc := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("pokedex >")
@@ -28,7 +28,7 @@ func Repl() {
 
 		command, ok := Commands()[word]
 		if ok {
-			err := command.callback()
+			err := command.callback(cfg)
 			if err != nil {
 				fmt.Println(err)
 			}
